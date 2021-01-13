@@ -1,7 +1,10 @@
 package com.xabia.demo.vaccine.model;
 
+//@Entity
 public class Branch {
 
+//	@Id
+//	@Column
     private int branch_id;
     private String name;
     private String address;

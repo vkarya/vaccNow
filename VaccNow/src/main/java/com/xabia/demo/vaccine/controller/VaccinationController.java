@@ -1,34 +1,35 @@
 package com.xabia.demo.vaccine.controller;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xabia.demo.vaccine.model.AppliedVaccination;
-import com.xabia.demo.vaccine.model.PaymentOptions;
-import com.xabia.demo.vaccine.repository.VaccinationRepository;
-import com.xabia.demo.vaccine.util.Utility;
+import com.xabia.demo.vaccine.service.VaccinationService;
 
 @RestController
 @RequestMapping("/vaccnow")
 public class VaccinationController {
     @Autowired
-    VaccinationRepository vaccinationRepo;
+    VaccinationService vaccinationService;
 
 	
-    @RequestMapping(value="/schedulevaccination", method = RequestMethod.GET)
+    @RequestMapping(value="/schedulevaccination", method = RequestMethod.POST)
     @ResponseBody
-    public String schedulevaccination(@RequestParam("vaccine_id") int vaccine_id,@RequestParam("branch_id") int branch_id,
-                          @RequestParam("timeslot") String timeslot, @RequestParam("user_id") int user_id){
+    public ResponseEntity schedulevaccination(@RequestBody Map<String, Object> userMap){
     	
-        if(vaccinationRepo.schedulevaccination(branch_id,vaccine_id,timeslot, user_id) >= 1){
-            return "Successfully Scheduled";
+        if(vaccinationService.schedulevaccination((Integer)userMap.get("branch_id"),(Integer)userMap.get("vaccine_id"),(String)userMap.get("timeslot"), (Integer)userMap.get("user_id")) >= 1){
+            return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
         }else{
-            return "Something went wrong!";
+        	return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -36,13 +37,13 @@ public class VaccinationController {
     @ResponseBody
     public List<String> choosepayment(@RequestParam("user_id") int user_id){
     	
-            return PaymentOptions.getPaymentOptions();
+            return vaccinationService.choosepayment(user_id);
     }
     
-    @RequestMapping(value="/scheduleconfirmationemail", method = RequestMethod.GET)
+    @RequestMapping(value="/scheduleconfirmationemail", method = RequestMethod.POST)
     @ResponseBody
-    public String scheduleconfirmationemail(@RequestParam("user_id") int user_id){
-    	
-            return Utility.emailUtility();
+    @ResponseStatus(HttpStatus.CREATED)
+    public String scheduleconfirmationemail(@RequestBody Map<String, Integer> userMap){
+            return vaccinationService.scheduleconfirmationemail(userMap.get("user_id"));
     }    
 }

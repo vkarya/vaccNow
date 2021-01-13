@@ -1,6 +1,5 @@
 package com.xabia.demo.vaccine.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.xabia.demo.vaccine.model.AppliedVaccination;
-import com.xabia.demo.vaccine.model.Branch;
-import com.xabia.demo.vaccine.model.TimeSlot;
-import com.xabia.demo.vaccine.model.Vaccine;
 
 @Repository
 public class ReportingRepository {

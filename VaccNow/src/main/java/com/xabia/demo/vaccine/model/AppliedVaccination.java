@@ -2,6 +2,9 @@ package com.xabia.demo.vaccine.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AppliedVaccination {
 
 	private int applied_id;

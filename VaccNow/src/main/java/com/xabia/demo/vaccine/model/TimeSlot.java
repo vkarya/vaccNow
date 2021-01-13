@@ -5,6 +5,7 @@ public class TimeSlot {
     private int slot_id;
     private int branch_id;
     private String timeslot;
+    private boolean is_occupied;
 
     public TimeSlot() {
     }
@@ -38,6 +39,14 @@ public class TimeSlot {
 
 	public void setTimeslot(String timeslot) {
 		this.timeslot = timeslot;
+	}
+
+	public boolean isIs_occupied() {
+		return is_occupied;
+	}
+
+	public void setIs_occupied(boolean is_occupied) {
+		this.is_occupied = is_occupied;
 	}
 
 

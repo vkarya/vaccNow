@@ -29,8 +29,8 @@ public class AvailabilityRepository {
     }
     
     public List<TimeSlot> getAvailableTimeSlots(int branch_id){
-        List<TimeSlot> timeslots = template.query("select slot_id, branch_id, timeslot from branch_timeslots where branch_id="+branch_id,(result,rowNum)->new TimeSlot(result.getInt("slot_id"),
-        		result.getInt("branch_id"), result.getString("timeslot")));
+        List<TimeSlot> timeslots = template.query("select slot_id, branch_id, timeslot from branch_timeslots where is_occupied is false and branch_id="+branch_id,(result,rowNum)->new TimeSlot(
+        		result.getInt("branch_id"), result.getInt("slot_id"), result.getString("timeslot")));
         return timeslots;
     }    
 
