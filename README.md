@@ -52,13 +52,14 @@ http://localhost:8761/vaccnow/listallconfirmedvaccination/2021-01-08/2021-01-11
 
 Vaccination Rest API:
 
-http://localhost:8761/vaccnow/schedulevaccination?vaccine_id=1&branch_id=101&timeslot=10:30AM-10:45AM&user_id=115
+curl -X POST "http://localhost:8761/vaccnow/schedulevaccination" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"user_id\": 102, \"branch_id\": 102, \"timeslot\": \"10:00AM-10:15AM\", \"vaccine_id\": 1}"
 
 http://localhost:8761/vaccnow/choosepayment?user_id=115
 
-http://localhost:8761/vaccnow/scheduleconfirmationemail?user_id=115
+curl -X POST "http://localhost:8761/vaccnow/scheduleconfirmationemail" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"user_id\": 110}"
+
 
 To Run Application, two ways can be followed:
 1. The application can be run by executing below command through console (if maven is installed):
   mvn spring-boot:run
-2. Or Through STS, by right clicking over application and run as 'Spring-Boot' application
+2. Or Through STS, by right clicking over application and run as 'Spring-Boot' application.
