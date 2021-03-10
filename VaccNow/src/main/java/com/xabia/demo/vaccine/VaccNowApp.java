@@ -7,9 +7,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class VaccNow_App {
+public class VaccNowApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VaccNow_App.class, args);
+		SpringApplication.run(VaccNowApp.class, args);
 	}
 }
